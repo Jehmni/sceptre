@@ -1,0 +1,45 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    margin-top: 50px;
+}
+
+button {
+    font-size: 24px;
+    padding: 10px 20px;
+    cursor: pointer;
+    border: none;
+    background: none;
+}
+
+button img {
+    width: 60px; /* Increased size */
+    height: 60px; /* Increased size */
+}
+
+button.recording img {
+    animation: pulse 1s infinite;
+    box-shadow: 0 0 10px red; /* Added shadow */
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#transcript-display {
+    margin-top: 20px;
+}
+
+#verses-display {
+    margin-top: 20px;
+    list-style-type: none;
+    padding: 0;
+}
