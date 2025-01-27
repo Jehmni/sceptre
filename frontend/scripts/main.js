@@ -21,12 +21,9 @@ microphoneIcon.addEventListener('click', async () => {
 async function startRecording() {
     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
     mediaRecorder = new MediaRecorder(stream, { mimeType: 'audio/webm' });
-    
-    mediaRecorder.ondataavailable = event => {
-        audioChunks.push(event.data);
-    };
 
-    mediaRecorder.onstop = async () => {
+    mediaRecorder.ondataavailable = async event => {
+        audioChunks.push(event.data);
         const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
         audioChunks = [];
         const formData = new FormData();
@@ -49,5 +46,5 @@ async function startRecording() {
         }
     };
 
-    mediaRecorder.start();
+    mediaRecorder.start(1000); // Send audio data every second
 }

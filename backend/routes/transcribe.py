@@ -10,6 +10,9 @@ transcribe_bp = Blueprint('transcribe', __name__)
 # Configure logging
 logging.basicConfig(level=logging.DEBUG)
 
+# Ensure pydub uses ffmpeg
+AudioSegment.converter = "C:\\ffmpeg\\bin\\ffmpeg.exe"  # Corrected path to ffmpeg
+
 @transcribe_bp.route('/transcribe', methods=['POST'])
 def transcribe_audio():
     if 'audio' not in request.files:
@@ -21,7 +24,7 @@ def transcribe_audio():
     recognizer = sr.Recognizer()
 
     try:
-        # Convert webm to WAV
+        # Convert webm to WAV using pydub
         if audio_file.content_type == 'audio/webm':
             audio_data = AudioSegment.from_file(io.BytesIO(audio_file.read()), format='webm')
             wav_io = io.BytesIO()
